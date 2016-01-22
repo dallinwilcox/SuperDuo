@@ -18,6 +18,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.net.UnknownHostException;
 
 import it.jaschke.alexandria.MainActivity;
 import it.jaschke.alexandria.R;
@@ -128,6 +129,12 @@ public class BookService extends IntentService {
                 return;
             }
             bookJsonString = buffer.toString();
+        } catch (UnknownHostException uhe){
+            Log.e(LOG_TAG, "UnknownHost ", uhe);
+            Intent messageIntent = new Intent(MainActivity.MESSAGE_EVENT);
+            messageIntent.putExtra(MainActivity.MESSAGE_KEY,getResources().getString(R.string.check_connection));
+            LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(messageIntent);
+            return;
         } catch (Exception e) {
             Log.e(LOG_TAG, "Error ", e);
         } finally {
@@ -157,6 +164,13 @@ public class BookService extends IntentService {
         final String IMG_URL = "thumbnail";
 
         try {
+            if (null == bookJsonString)
+            {
+                Intent messageIntent = new Intent(MainActivity.MESSAGE_EVENT);
+                messageIntent.putExtra(MainActivity.MESSAGE_KEY,getResources().getString(R.string.not_found));
+                LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(messageIntent);
+                return;
+            }
             JSONObject bookJson = new JSONObject(bookJsonString);
             JSONArray bookArray;
             if(bookJson.has(ITEMS)){
@@ -200,6 +214,8 @@ public class BookService extends IntentService {
             Log.e(LOG_TAG, "Error ", e);
         }
     }
+
+
 
     private void writeBackBook(String ean, String title, String subtitle, String desc, String imgUrl) {
         ContentValues values= new ContentValues();
