@@ -4,8 +4,12 @@ import android.annotation.TargetApi;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
+
+import barqsoft.footballscores.FootbalScoresAppWidgetProvider;
+import barqsoft.footballscores.R;
 
 /**
  * Created by dcwilcox on 2/15/2016.
@@ -50,7 +54,14 @@ public class ScoreWidgetService extends RemoteViewsService{
 
         @Override
         public RemoteViews getViewAt(int position) {
-            return null;
+
+            RemoteViews remoteViews = new RemoteViews(context.getPackageName(), R.layout.scores_list_item);
+            remoteViews.setTextViewText(R.id.home_name, "home_name");
+            remoteViews.setTextViewText(R.id.away_name, "away_name");
+            remoteViews.setTextViewText(R.id.score_textview, "score");
+            remoteViews.setTextViewText(R.id.data_textview, "date");
+
+            return remoteViews;
         }
 
         @Override
@@ -65,7 +76,7 @@ public class ScoreWidgetService extends RemoteViewsService{
 
         @Override
         public long getItemId(int position) {
-            return 0;
+            return position;
         }
 
         @Override
