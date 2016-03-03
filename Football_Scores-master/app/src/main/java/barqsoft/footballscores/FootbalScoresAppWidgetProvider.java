@@ -37,10 +37,11 @@ public class FootbalScoresAppWidgetProvider extends AppWidgetProvider {
             RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.widget_layout);
             views.setOnClickPendingIntent(R.id.wrapper, pendingIntent);
             views.setRemoteAdapter(appWidgetId, R.id.widget_score_list, serviceIntent);
-
+            views.setEmptyView(R.id.widget_score_list, R.id.empty_view);
             // Tell the AppWidgetManager to perform an update on the current app widget
             appWidgetManager.updateAppWidget(appWidgetId, views);
         }
+        super.onUpdate(context, appWidgetManager, appWidgetIds);
     }
 
 }
