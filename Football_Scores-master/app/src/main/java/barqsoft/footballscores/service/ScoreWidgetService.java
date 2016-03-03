@@ -20,7 +20,11 @@ import barqsoft.footballscores.scoresAdapter;
 
 /**
  * Created by dcwilcox on 2/15/2016.
- */
+ * Referenced android StackWidget Sample at
+ * https://github.com/android/platform_development/tree/master/samples/StackWidget
+ * */
+
+
 public class ScoreWidgetService extends RemoteViewsService{
 
     @Override

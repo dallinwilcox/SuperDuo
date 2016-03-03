@@ -10,11 +10,14 @@ import android.net.Uri;
 import android.widget.RemoteViews;
 
 import barqsoft.footballscores.service.ScoreWidgetService;
-import barqsoft.footballscores.service.myFetchService;
-//referenced http://developer.android.com/guide/topics/appwidgets/index.html
 /**
  * Created by dcwilcox on 1/29/2016.
+ * Referenced
+ * http://developer.android.com/guide/topics/appwidgets/index.html
+ * and android StackWidget Sample at
+ * https://github.com/android/platform_development/tree/master/samples/StackWidget
  */
+
 public class FootbalScoresAppWidgetProvider extends AppWidgetProvider {
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         final int N = appWidgetIds.length;
